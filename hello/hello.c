@@ -8,6 +8,18 @@ int main()
     // \n is the shortcut for new line
     printf("Hello World!!!\n\n\n");
 
-/* return 0:indicated taht the program is successfully */
+    // variable of 32 chars
+    char name[32];
+
+    // ask for name
+    printf("Enter a name: ");
+
+    // read the input of the user
+    scanf("%s", name);
+
+    // print a message with the name entered
+    printf("\nHello\t%s\n\n\n", name);
+
+    /* return 0:indicated taht the program is successfully */
     return 0;
 }

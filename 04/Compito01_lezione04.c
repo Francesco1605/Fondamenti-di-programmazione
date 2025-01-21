@@ -1,93 +1,40 @@
 #include <stdio.h>
+#include <string.h>
 
-// Macro per calcolare la penale del 10%
-#define CALCOLA_PENALE(importo) ((importo) * 0.10)
-
-// Definizione per abilitare/disabilitare la penale
-#define ABILITA_PENALE
-
-// Soglia per il controllo della spesa totale
-#define SOGLIA_SPESA 500.0
-
-// Definizione per abilitare il debug
-#define DEBUG
+// Macro per calcolare l'IVA
+#define CALCOLA_IVA(spesa) ((spesa) * 0.22)
 
 int main() {
-    float elettricita, acqua, gas, internet;
-    float totale, penale = 0.0;
+    char giorno[20];
+    float spesa, iva, totale_con_iva;
 
-    // Input delle spese
-    printf("Inserisci la spesa per l'elettricità: ");
-    scanf("%f", &elettricita);
+    // Chiede all'utente di inserire il giorno della settimana e la spesa
+    printf("Inserisci il giorno della settimana: ");
+    scanf("%s", giorno);
 
-    printf("Inserisci la spesa per l'acqua: ");
-    scanf("%f", &acqua);
+    printf("Inserisci la spesa effettuata in questo giorno: ");
+    scanf("%f", &spesa);
 
-    printf("Inserisci la spesa per il gas: ");
-    scanf("%f", &gas);
+    // Calcolo dell'IVA e del totale con IVA
+    iva = CALCOLA_IVA(spesa);
+    totale_con_iva = spesa + iva;
 
-    printf("Inserisci la spesa per internet: ");
-    scanf("%f", &internet);
-
-    // Calcolo del totale
-    totale = elettricita + acqua + gas + internet;
-
-    // Calcolo della penale se abilitata
-    #ifdef ABILITA_PENALE
-        penale = CALCOLA_PENALE(totale);
-    #endif
-
-    // Debug: stampa delle spese
-    #ifdef DEBUG
-        printf("[DEBUG] Spesa elettricità: %.2f\n", elettricita);
-        printf("[DEBUG] Spesa acqua: %.2f\n", acqua);
-        printf("[DEBUG] Spesa gas: %.2f\n", gas);
-        printf("[DEBUG] Spesa internet: %.2f\n", internet);
-        printf("[DEBUG] Totale senza penale: %.2f\n", totale);
-        printf("[DEBUG] Penale (se applicabile): %.2f\n", penale);
-    #endif
-
-    // Controllo se la spesa supera la soglia
-    if (totale > SOGLIA_SPESA) {
-        printf("Attenzione: la spesa totale supera la soglia di %.2f euro!\n", SOGLIA_SPESA);
+    // Determinazione se il giorno è feriale o festivo
+    if (strcmp(giorno, "sabato") == 0 || strcmp(giorno, "domenica") == 0) {
+        printf("Giorno festivo: %s\n", giorno);
+    } else if (strcmp(giorno, "lunedi") == 0 || strcmp(giorno, "martedi") == 0 ||
+               strcmp(giorno, "mercoledi") == 0 || strcmp(giorno, "giovedi") == 0 ||
+               strcmp(giorno, "venerdi") == 0) {
+        printf("Giorno feriale: %s\n", giorno);
     } else {
-        printf("La spesa totale è entro la soglia di %.2f euro.\n", SOGLIA_SPESA);
+        printf("Giorno non valido: %s\n", giorno);
+        return 1; // Esce dal programma con codice di errore
     }
 
-    // Suggerimenti di risparmio
-    printf("Suggerimenti di risparmio:\n");
-    switch ((int)(totale / 100)) {
-        case 0:
-        case 1:
-        case 2:
-            printf("- Ottimo lavoro! Continua così.\n");
-            break;
-        case 3:
-        case 4:
-            printf("- Considera di ridurre il consumo di gas o acqua.\n");
-            break;
-        case 5:
-        case 6:
-            printf("- Riduci l'uso di elettrodomestici energivori.\n");
-            break;
-        default:
-            printf("- Necessario un piano di risparmio generale.\n");
-            break;
-    }
-
-    // Riepilogo finale
-    printf("\nRiepilogo:\n");
-    printf("Spesa elettricità: %.2f euro\n", elettricita);
-    printf("Spesa acqua: %.2f euro\n", acqua);
-    printf("Spesa gas: %.2f euro\n", gas);
-    printf("Spesa internet: %.2f euro\n", internet);
-    printf("Totale senza penale: %.2f euro\n", totale);
-    #ifdef ABILITA_PENALE
-        printf("Penale applicata: %.2f euro\n", penale);
-    #else
-        printf("Penale non applicata.\n");
-    #endif
-    printf("Totale con penale: %.2f euro\n", totale + penale);
+    // Stampa i risultati
+    printf("Spesa senza IVA: %.2f euro\n", spesa);
+    printf("IVA (22%%): %.2f euro\n", iva);
+    printf("Totale con IVA: %.2f euro\n", totale_con_iva);
 
     return 0;
 }

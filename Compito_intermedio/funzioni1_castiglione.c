@@ -23,6 +23,6 @@ void test_all_operations(int arr[], int size) {
         printf("%d * %d = %d\n", arr[i], arr[i+1], mul(arr[i], arr[i+1]));
         printf("%d / %d = %.2f\n", arr[i+1], arr[i], divi(arr[i+1], arr[i]));
         printf("%d %% %d = %d\n", arr[i], arr[i+1], mod(arr[i], arr[i+1]));
-        printf("%d ^ %d = %d\n", arr[i], arr[i+1], power(arr[i], arr[i+1]));
+        printf("%d ^ 2 = %d\n", arr[i+1], power(arr[i+1], 2));
     }
 }

@@ -1,6 +1,7 @@
 // Dichiarazione delle funzioni:
 #ifndef ESERCIZIO2_CASTIGLIONE_H
 #define ESERCIZIO2_CASTIGLIONE_H
+
 #define SIZE 7
 #define MAX_LEN 20
 

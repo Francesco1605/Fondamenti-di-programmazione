@@ -2,6 +2,7 @@
 #include <string.h>
 #include <ctype.h>
 #include "esercizio2_castiglione.h"
+
 #define SIZE 7
 #define MAX_LEN 20
 

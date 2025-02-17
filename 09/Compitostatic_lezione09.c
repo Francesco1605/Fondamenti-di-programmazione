@@ -2,39 +2,37 @@
 #include <string.h>
 #include "compitostatic_lezione09.h"
 
-void analyze_word(char word[]) {
-    int i = 0;
-    int vowels = 0;
-    int consonants = 0;
-    while (word[i] != '\0') {
-        if (word[i] == 'a' || word[i] == 'e' || word[i] == 'i' || word[i] == 'o' || word[i] == 'u') {
-            vowels++;
-        } else {
-            consonants++;
-        }
-        i++;
-    }
-    printf("Vowels: %d\n", vowels);
-    printf("Consonants: %d\n", consonants);
-}
-
 int main() {
-
+    
+    int total_words = 0;
+    int total_vowels = 0;
+    int total_consonants = 0;
+    int total_length = 0;
     char word[100];
+    
 
-    do{
-        printf("Insert a word: ");
+    do {
+        printf("Inserisci una parola: "); // Chiede all'utente di inserire una parola
         scanf("%s", word);
-        analyze_word(word);
 
-    } while (word[0] == 'STOP');
+        if (strcmp(word, "stop") == 0) {
+            break;
+        } // Se l'utente inserisce "stop" il programma si ferma
 
+        size_t length = strlen(word);
+        total_words++; // Somma totale delle parole analizzate
+        total_length += length; // Somma totale della lunghezza delle parole
 
+        analyze_word(word, &total_vowels, &total_consonants);
 
+        printf("Totale vocali: %d, Totale consonanti: %d\n", total_vowels, total_consonants);
+        printf("Totale parole analizzate: %d\n", total_words);
+        printf("Lunghezza parola: %d\n", length);
+        printf("Totale lunghezza parole: %d\n", total_length);
+        printf("Media lunghezza parole: %.2f\n", (float)total_length / total_words);
+        printf("\n");
 
-
-
-
+    } while (1); // Ciclo infinito
 
     return 0;
 }

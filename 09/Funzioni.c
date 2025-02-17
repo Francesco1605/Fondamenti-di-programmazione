@@ -1,4 +1,6 @@
+#include <stdio.h>
 #include <string.h>
+#include "compitostatic_lezione09.h"
 
 void analyze_word(char word[], int *vowels, int *consonants) {
     int local_vowels = 0;

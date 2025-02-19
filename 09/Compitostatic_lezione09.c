@@ -12,7 +12,7 @@ int main() {
         printf("Inserisci una parola (stop per teminare): "); // Chiede all'utente di inserire una parola
         scanf("%s", word);
 
-        analyze_word(word, total_words, total_length);
+        analyze_word(word);
 
         if (strcmp(word, "stop") == 0) {
             printf("Programma terminato.\n");

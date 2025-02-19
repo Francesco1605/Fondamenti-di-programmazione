@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "c:/Users/Francesco.Castiglion/Desktop/Fondamenti di programmazione/Fondamenti-di-programmazione/Compito_intermedio",
-      "program": "c:/Users/Francesco.Castiglion/Desktop/Fondamenti di programmazione/Fondamenti-di-programmazione/Compito_intermedio/build/Debug/outDebug",
+      "cwd": "c:/Users/Francesco.Castiglion/Desktop/Fondamenti di programmazione/Fondamenti-di-programmazione/09",
+      "program": "c:/Users/Francesco.Castiglion/Desktop/Fondamenti di programmazione/Fondamenti-di-programmazione/09/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

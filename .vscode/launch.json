@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": ".",
-      "program": "build/Debug/outDebug",
+      "cwd": "c:/Users/Francesco.Castiglion/Desktop/Fondamenti di programmazione/Fondamenti-di-programmazione/010",
+      "program": "c:/Users/Francesco.Castiglion/Desktop/Fondamenti di programmazione/Fondamenti-di-programmazione/010/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
@@ -45,6 +45,17 @@
         }
       ],
       "preLaunchTask": "C/C++: gcc.exe build active file"
+    },
+    {
+      "name": "(Windows) Launch",
+      "type": "cppvsdbg",
+      "request": "launch",
+      "program": "enter program name, for example ${workspaceFolder}/a.exe",
+      "args": [],
+      "stopAtEntry": false,
+      "cwd": "${fileDirname}",
+      "environment": [],
+      "console": "externalTerminal"
     }
   ]
 }

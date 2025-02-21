@@ -3,8 +3,7 @@
 #include "compitostatic_lezione09.h"
 
 int main() {
-    static int total_words = 0;
-    static size_t total_length = 0;
+    
     char word[100];
 
     do {

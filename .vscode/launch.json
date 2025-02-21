@@ -9,7 +9,7 @@
             "stopAtEntry": false,
             "externalConsole": true,
             "cwd": "c:/Users/Francesco.Castiglion/Desktop/Fondamenti di programmazione/Fondamenti-di-programmazione/02",
-            "program": "c:/Users/Francesco.Castiglion/Desktop/Fondamenti di programmazione/Fondamenti-di-programmazione/02/build/Debug/outDebug",
+            "program": "c:/Users/Francesco.Castiglion/Desktop/Fondamenti di programmazione/Fondamenti-di-programmazione/09/build/Debug/outDebug",
             "MIMode": "gdb",
             "miDebuggerPath": "gdb",
             "setupCommands": [

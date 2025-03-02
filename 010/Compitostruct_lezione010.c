@@ -1,79 +1,100 @@
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-#define MAX_PLAYERS 5
-#define PLAYERS_FILE_NAME "giocatori.txt"
+#define MAX_PLAYERS 10
 
-struct Player 
-{
+// definizione della struct player
+typedef struct {
     char name[50];
-    char surname[50];
     int number;
     float pointsPerGame;
     float reboundsPerGame;
     float assistsPerGame;
-};
+} Player;
 
-// Removed duplicate function definition
-
-int readPlayersFromFile(struct Player tm[], int size)
-{
-
-    int result = 0;
-    FILE* file = fopen(PLAYERS_FILE_NAME, "r");
-    if (file == NULL)
-    {
-        printf("Errore: impossibile leggere il file con i dati dei giocatori\n");
+// funzione per leggere i giocatori da un file
+int readPlayersFromFile(Player players[], const char* filename) {
+    FILE *file = fopen(filename, "r");
+    if (!file) {
+        printf("errore nell'apertura del file %s\n", filename);
+        return 0;
     }
-    else
-    {
-        for (int i = 0; i < size; i++)
-        {
-            fscanf(file, "%s %s %d %f %f %f", tm[i].name, tm[i].surname, tm[i].number, tm[i].pointsPerGame, tm[i].reboundsPerGame, tm[i].assistsPerGame);
+
+    int count = 0;
+    char line[256];
+    
+    while (count < MAX_PLAYERS && fgets(line, sizeof(line), file)) {
+        // Ignora righe vuote
+        if (line[0] == '\n' || line[0] == '\0') {
+            continue;
         }
-        fclose(file);
-        result = size;
+        
+        // Leggi nome, cognome e statistiche
+        char firstName[25], lastName[25];
+        if (sscanf(line, "%s %s %d %f %f %f", 
+                firstName, lastName, &players[count].number, 
+                &players[count].pointsPerGame, &players[count].reboundsPerGame, 
+                &players[count].assistsPerGame) == 6) {
+            
+            // Combina nome e cognome
+            sprintf(players[count].name, "%s %s", firstName, lastName);
+            count++;
+        }
     }
-    return result;
+
+    fclose(file);
+    return count;
 }
 
-void Print_Player(struct Player tm[], int size)
-{
-    for (int i = 0; i < size; i++)
-    {
-        struct Player* ptr = &tm[i];
-        printf("Hello %s %s: numero di maglia %d punti %f\n", ptr->name, ptr->surname, ptr->number, ptr->pointsPerGame);
-    }
+// funzione per stampare un giocatore
+void printPlayer(const Player* p) {
+    printf("nome: %s\nnumero di maglia: %d\n", p->name, p->number);
+    printf("punti per partita: %.2f\nrimbalzi per partita: %.2f\nassist per partita: %.2f\n\n", 
+           p->pointsPerGame, p->reboundsPerGame, p->assistsPerGame);
 }
 
-struct Player bestPlayer(struct Player tm[], int size)
-{
-    struct Player best = tm[0];
-    for (int i = 1; i < size; i++)
-    {
-        if (tm[i].pointsPerGame > best.pointsPerGame)
-        {
-            best = tm[i];
+// funzione per trovare il miglior marcatore
+Player bestScorer(Player players[], int size) {
+    Player best = players[0];
+    for (int i = 1; i < size; i++) {
+        if (players[i].pointsPerGame > best.pointsPerGame) {
+            best = players[i];
         }
     }
     return best;
 }
 
-int main()
-{
-    struct Player team[MAX_PLAYERS];
-    int numPlayers = readPlayersFromFile(team, MAX_PLAYERS);
-    if (numPlayers > 0)
-    {
-        printf("Non ci sono giocatori da leggere dal file\n");
+int main() {
+    Player players[MAX_PLAYERS];
+    int numPlayers = 0;
+
+    // Prima lettura dal primo file
+    numPlayers = readPlayersFromFile(players, "giocatori1.txt");
+
+    printf("--- squadra ---\n\n");
+    for (int i = 0; i < numPlayers; i++) {
+        printPlayer(&players[i]);
     }
-    if (numPlayers <= 0)
-    {
-        Print_Player(team, MAX_PLAYERS);
+
+    // trovare e stampare il miglior marcatore
+    Player topScorer = bestScorer(players, numPlayers);
+    printf("il miglior marcatore della squadra è: %s con %.2f punti a partita.\n", 
+           topScorer.name, topScorer.pointsPerGame);
+
+    // Seconda lettura dal secondo file
+    numPlayers = readPlayersFromFile(players, "giocatori2.txt");
+
+    printf("--- squadra dal secondo file ---\n\n");
+    for (int i = 0; i < numPlayers; i++) {
+        printPlayer(&players[i]);
     }
-    printf("\n\n");
+
+    // trovare e stampare il miglior marcatore dal secondo file
+    topScorer = bestScorer(players, numPlayers);
+    printf("il miglior marcatore della squadra è: %s con %.2f punti a partita.\n", 
+           topScorer.name, topScorer.pointsPerGame);
 
     return 0;
-
 }

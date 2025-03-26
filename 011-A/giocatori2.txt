@@ -1,0 +1,5 @@
+Kobe Bryant 24 25.0 5.2 4.7
+Shaquille O'Neal 34 23.7 10.9 2.5
+Tim Duncan 21 19.0 10.8 3.0
+Dirk Nowitzki 41 21.8 7.7 2.5
+Dwyane Wade 3 22.0 4.7 5.4

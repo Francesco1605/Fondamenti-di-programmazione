@@ -2,47 +2,40 @@
 #include <fstream>
 #include <vector>
 #include <string>
+#include "player.h"
 
 using namespace std;
 
-class Person {
-protected:
-    string name, surname;
-public:
-    Person(const string& n, const string& s) : name(n), surname(s) {}
-    virtual ~Person() {}
-    string getFullName() const { return name + " " + surname; }
-};
-
-class Player : public Person {
-private:
-    int number;
-    float pointsPerGame, reboundsPerGame, assistsPerGame;
-    static int totalPlayers;
-public:
-    Player(const string& n, const string& s, int num, float ppg, float rpg, float apg)
-        : Person(n, s), number(num), pointsPerGame(ppg), reboundsPerGame(rpg), assistsPerGame(apg) {
-        totalPlayers++;
-    }
-
-    ~Player() {}
-
-    void print() const {
-        cout << "---------------------------" << endl;
-        cout << "Nome: " << getFullName() << endl;
-        cout << "Numero di maglia: " << number << endl;
-        cout << "Punti per partita: " << pointsPerGame << endl;
-        cout << "Rimbalzi per partita: " << reboundsPerGame << endl;
-        cout << "Assist per partita: " << assistsPerGame << endl;
-        cout << "---------------------------" << endl << endl;
-    }
-
-    float getPointsPerGame() const { return pointsPerGame; }
-    static int getTotalPlayers() { return totalPlayers; }
-};
-
+// inizializzazione della variabile statica
 int Player::totalPlayers = 0;
 
+// implementazione dei metodi di person
+Person::Person(const string& n, const string& s) : name(n), surname(s) {}
+Person::~Person() {}
+string Person::getFullName() const { return name + " " + surname; }
+
+// implementazione dei metodi di player
+Player::Player(const string& n, const string& s, int num, float ppg, float rpg, float apg)
+    : Person(n, s), number(num), pointsPerGame(ppg), reboundsPerGame(rpg), assistsPerGame(apg) {
+    totalPlayers++;
+}
+
+Player::~Player() {}
+
+void Player::print() const {
+    cout << "---------------------------" << endl;
+    cout << "Nome: " << getFullName() << endl;
+    cout << "Numero di maglia: " << number << endl;
+    cout << "Punti per partita: " << pointsPerGame << endl;
+    cout << "Rimbalzi per partita: " << reboundsPerGame << endl;
+    cout << "Assist per partita: " << assistsPerGame << endl;
+    cout << "---------------------------" << endl << endl;
+}
+
+float Player::getPointsPerGame() const { return pointsPerGame; }
+int Player::getTotalPlayers() { return totalPlayers; }
+
+// funzione per leggere i giocatori dal file
 int readPlayersFromFile(vector<Player>& players, const string& filename) {
     ifstream file(filename);
     if (!file) {
@@ -67,6 +60,7 @@ int readPlayersFromFile(vector<Player>& players, const string& filename) {
     return count;
 }
 
+// funzione per trovare il miglior marcatore
 Player bestScorer(const vector<Player>& players) {
     if (players.empty()) {
         cerr << "Errore: nessun giocatore disponibile." << endl;
@@ -82,6 +76,7 @@ Player bestScorer(const vector<Player>& players) {
     return *best;
 }
 
+// funzione principale
 int main() {
     vector<Player> players;
 
